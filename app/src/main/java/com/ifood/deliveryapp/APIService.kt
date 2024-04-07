@@ -1,9 +1,12 @@
 package com.ifood.deliveryapp
 
+import retrofit2.http.GET
+
 const val RESTAURANT_LIST_ENDPOINT = "home_restaurant_list.json"
 
 interface APIService {
 
-    // TODO: Implement getRestaurantList function definition. It must return a List<Restaurant> object.
+    @GET(RESTAURANT_LIST_ENDPOINT)
+    suspend fun getRestaurantList(): List<Restaurant>
 
 }

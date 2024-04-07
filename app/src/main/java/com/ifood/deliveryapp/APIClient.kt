@@ -1,15 +1,25 @@
 package com.ifood.deliveryapp
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+
 const val BASE_URL = "https://raw.githubusercontent.com/devpass-tech/challenge-delivery-app/main/api/"
 
 class APIClient {
 
     fun getAPIService() : APIService {
 
-        // TODO: Instantiate a Moshi object and configure it properly using KotlinJsonAdapterFactory
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
-        // TODO: Instantiate a Retrofit object and configure it properly using MoshiConverterFactory
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
 
-        // TODO: From the Retrofit object, create an object using API service interface and return it in this function
+        return retrofit.create(APIService::class.java)
     }
 }
